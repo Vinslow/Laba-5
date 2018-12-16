@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation=
+               "http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+    <bean id="port" class="ru.rsreu.java5.entity.Port" factory-method="getInstance"/>
+    <bean id="semaphore" class="java.util.concurrent.Semaphore">
+        <constructor-arg value="#{port.dockCount}"/>
+        <constructor-arg value="true"/>
+    </bean>
+
+    <bean id="executorService" class="java.util.concurrent.Executors" factory-method="newCachedThreadPool">
+    </bean>
+
+    <bean id="portManager" class="ru.rsreu.java5.logic.CommandPort">
+        <constructor-arg index="0" ref="semaphore"/>
+        <constructor-arg index="1" ref="port"/>
+    </bean>
+    <bean id="loader" class="ru.rsreu.java5.logic.Loader">
+        <constructor-arg ref="port"/>
+    </bean>
+
+    <bean id="ship" class="ru.rsreu.java5.entity.Ship" abstract="true">
+        <constructor-arg index="2" ref="portManager"/>
+    </bean>
+
+    <bean id="shipTrue" class="ru.rsreu.java5.entity.Ship" scope="prototype" parent="ship" abstract="true">
+        <constructor-arg index="1" value="true"/>
+    </bean>
+
+    <bean id="shipFalse" class="ru.rsreu.java5.entity.Ship" scope="prototype" parent="ship" abstract="true">
+        <constructor-arg index="1" value="false"/>
+    </bean>
+
+    <util:list id="shipList" list-class="java.util.ArrayList" value-type="java.util.concurrent.Callable">
+        <bean parent="shipTrue">
+            <constructor-arg index="0" value="#{T(Math).random()* 20 + 2}"/>
+        </bean>
+        <bean parent="shipTrue">
+            <constructor-arg index="0" value="#{T(Math).random()* 20 + 2}"/>
+        </bean>
+        <bean parent="shipTrue">
+            <constructor-arg index="0" value="#{T(Math).random()* 20 + 2}"/>
+        </bean>
+        <bean parent="shipTrue">
+            <constructor-arg index="0" value="#{T(Math).random()* 20 + 2}"/>
+        </bean>
+        <bean parent="shipTrue">
+            <constructor-arg index="0" value="#{T(Math).random()* 20 + 2}"/>
+        </bean>
+        <bean parent="shipTrue">
+            <constructor-arg index="0" value="#{T(Math).random()* 20 + 2}"/>
+        </bean>
+        <bean parent="shipTrue">
+            <constructor-arg index="0" value="#{T(Math).random()* 20 + 2}"/>
+        </bean>
+        <bean parent="shipTrue">
+            <constructor-arg index="0" value="#{T(Math).random()* 20 + 2}"/>
+        </bean>
+        <bean parent="shipTrue">
+            <constructor-arg index="0" value="#{T(Math).random()* 20 + 2}"/>
+        </bean>
+        <bean parent="shipTrue">
+            <constructor-arg index="0" value="#{T(Math).random()* 20 + 2}"/>
+        </bean>
+        <bean parent="shipTrue">
+            <constructor-arg index="0" value="#{T(Math).random()* 20 + 2}"/>
+        </bean>
+        <bean parent="shipTrue">
+            <constructor-arg index="0" value="#{T(Math).random()* 20 + 2}"/>
+        </bean>
+        <bean parent="shipTrue">
+            <constructor-arg index="0" value="#{T(Math).random()* 20 + 2}"/>
+        </bean>
+        <bean parent="shipTrue">
+            <constructor-arg index="0" value="#{T(Math).random()* 20 + 2}"/>
+        </bean>
+        <bean parent="shipTrue">
+            <constructor-arg index="0" value="#{T(Math).random()* 20 + 2}"/>
+        </bean>
+        <bean parent="shipFalse">
+            <constructor-arg index="0" value="#{T(Math).random()* 20 + 2}"/>
+        </bean>
+        <bean parent="shipFalse">
+            <constructor-arg index="0" value="#{T(Math).random()* 20 + 2}"/>
+        </bean>
+        <bean parent="shipFalse">
+            <constructor-arg index="0" value="#{T(Math).random()* 20 + 2}"/>
+        </bean>
+        <bean parent="shipFalse">
+            <constructor-arg index="0" value="#{T(Math).random()* 20 + 2}"/>
+        </bean>
+        <bean parent="shipFalse">
+            <constructor-arg index="0" value="#{T(Math).random()* 20 + 2}"/>
+        </bean>
+        <bean parent="shipFalse">
+            <constructor-arg index="0" value="#{T(Math).random()* 20 + 2}"/>
+        </bean>
+        <bean parent="shipFalse">
+            <constructor-arg index="0" value="#{T(Math).random()* 20 + 2}"/>
+        </bean>
+        <bean parent="shipFalse">
+            <constructor-arg index="0" value="#{T(Math).random()* 20 + 2}"/>
+        </bean>
+        <bean parent="shipFalse">
+            <constructor-arg index="0" value="#{T(Math).random()* 20 + 2}"/>
+        </bean>
+        <bean parent="shipFalse">
+            <constructor-arg index="0" value="#{T(Math).random()* 20 + 2}"/>
+        </bean>
+        <bean parent="shipFalse">
+            <constructor-arg index="0" value="#{T(Math).random()* 20 + 2}"/>
+        </bean>
+        <bean parent="shipFalse">
+            <constructor-arg index="0" value="#{T(Math).random()* 20 + 2}"/>
+        </bean>
+        <bean parent="shipFalse">
+            <constructor-arg index="0" value="#{T(Math).random()* 20 + 2}"/>
+        </bean>
+        <bean parent="shipFalse">
+            <constructor-arg index="0" value="#{T(Math).random()* 20 + 2}"/>
+        </bean>
+        <bean parent="shipFalse">
+            <constructor-arg index="0" value="#{T(Math).random()* 20 + 2}"/>
+        </bean>
+    </util:list>
+
+
+
+
+
+</beans>
